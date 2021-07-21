@@ -36,7 +36,7 @@ function App() {
     <div className='App'>
       <header className='App-header'>
         <img src={logo} className='App-logo' alt='logo' />
-        <h3>Welcome to your Account.</h3>
+        <h3>Welcome to your Account</h3>
         <p>Site is under Development | We apologize for the inconvenience</p>
         <AmplifySignOut />
       </header>
