@@ -4,6 +4,7 @@ import { Auth } from 'aws-amplify'
 import { addOrUpdateUserToFirestore } from './utils/firebaseUtils'
 import firebase from 'firebase'
 import Main from './Main'
+import './App.css'
 
 const SecurityQuestions = () => {
   const [success, setSuccess] = useState(false)
@@ -137,8 +138,17 @@ const SecurityQuestions = () => {
                 </div>
                 <hr />
                 <div className='text-center'>
-                  <Button type='submit' className='m-2 px-5 btn-primary'>
-                    Submit
+                  <Button
+                    type='submit'
+                    className='m-2 px-5 py-2 btn-primary'
+                    style={{
+                      backgroundColor: '#006400',
+                      borderColor: '#006400',
+                      borderRadius: '0px',
+                      fontSize: '15px',
+                    }}
+                  >
+                    <b>SUBMIT</b>
                   </Button>
                 </div>
               </Form>
@@ -187,8 +197,17 @@ const SecurityQuestions = () => {
                 <br />
                 <hr />
                 <div className='text-center'>
-                  <Button type='submit' className='m-2 px-5 btn-primary'>
-                    Submit
+                  <Button
+                    type='submit'
+                    className='m-2 px-5 py-2 btn-primary'
+                    style={{
+                      backgroundColor: '#006400',
+                      borderColor: '#006400',
+                      borderRadius: '0px',
+                      fontSize: '15px',
+                    }}
+                  >
+                    <b>SUBMIT</b>
                   </Button>
                 </div>
               </Form>
