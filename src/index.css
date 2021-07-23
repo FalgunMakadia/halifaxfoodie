@@ -12,9 +12,9 @@ code {
     monospace;
 }
 
-:root {
+#root {
   --amplify-primary-color: #0091ff;
   --amplify-primary-tint: #0073c9;
   --amplify-primary-shade: #0073c9;
-  background-color: lightgray;
+  background-color: #282c34;
 }
