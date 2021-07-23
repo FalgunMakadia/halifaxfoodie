@@ -11,7 +11,7 @@ const Main = () => {
       <h3>{Auth.user.username.toUpperCase()}, Welcome to your Account</h3>
       <p>Site is under Development | We apologize for the inconvenience</p>
       <br />
-      <div className='w-50 text-right m-auto'>
+      <div className='w-30 text-right m-auto'>
         <AmplifySignOut />
       </div>
     </div>

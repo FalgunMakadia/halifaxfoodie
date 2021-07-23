@@ -9,13 +9,19 @@ export const ifUserAlreadyExists = () => {
   })
 }
 
-export const addOrUpdateUserToFirestore = (Auth, answer1, answer2) => {
+export const addOrUpdateUserToFirestore = (
+  Auth,
+  answer1,
+  answer2,
+  userType
+) => {
   const user = {
     username: Auth.user.username,
     email: Auth.user.attributes.email,
     phone: Auth.user.attributes.phone_number,
     answer1,
     answer2,
+    userType,
   }
   ref
     .doc(Auth.user.username)
@@ -35,6 +41,7 @@ export const addUserToFirestore = (Auth) => {
     phone: Auth.user.attributes.phone_number,
     answer1: '',
     answer2: '',
+    userType: null,
   }
   ref
     .doc(Auth.user.username)

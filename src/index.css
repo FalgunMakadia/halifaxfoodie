@@ -13,8 +13,9 @@ code {
 }
 
 #root {
-  --amplify-primary-color: #0091ff;
-  --amplify-primary-tint: #0073c9;
-  --amplify-primary-shade: #0073c9;
+  --amplify-primary-color: #006400;
+  --amplify-primary-tint: #006400;
+  --amplify-primary-shade: #006400;
   background-color: #282c34;
+  /* #0073c9 */
 }

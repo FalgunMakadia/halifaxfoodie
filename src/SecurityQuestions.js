@@ -58,10 +58,16 @@ const SecurityQuestions = () => {
 
   const registerSubmitHandler = (e) => {
     e.preventDefault()
+    var userType = ''
+    if (document.getElementById('restaurant').checked)
+      userType = document.getElementById('restaurant').value
+    if (document.getElementById('customer').checked)
+      userType = document.getElementById('customer').value
     addOrUpdateUserToFirestore(
       Auth,
       answer1.toLowerCase(),
-      answer2.toLowerCase()
+      answer2.toLowerCase(),
+      userType
     )
     setSuccess(true)
   }
@@ -82,10 +88,31 @@ const SecurityQuestions = () => {
             style={{ width: '22rem', marginTop: '2rem' }}
           >
             <Card.Body>
-              <h3 className='p-3'>Set Security Questions</h3>
+              <h3 className='p-3'>Additional Information</h3>
               <hr />
               <Form className='text-start' onSubmit={registerSubmitHandler}>
-                <div className='mt-4'>
+                <h6>Who are you?</h6>
+                <div
+                  style={{ fontSize: '16px' }}
+                  className='d-flex flex-row justify-content-around'
+                >
+                  <Form.Check
+                    label='Customer'
+                    type='radio'
+                    id='customer'
+                    name='user-type'
+                    value='customer'
+                    defaultChecked
+                  />
+                  <Form.Check
+                    label='Restaurant'
+                    type='radio'
+                    id='restaurant'
+                    name='user-type'
+                    value='restaurant'
+                  />
+                </div>
+                <div className='my-4'>
                   <h6>What is your favourite color?</h6>
                   <Form.Group>
                     <Form.Control
@@ -93,6 +120,7 @@ const SecurityQuestions = () => {
                       placeholder='Enter your answer'
                       value={answer1}
                       onChange={(e) => setAnswer1(e.target.value)}
+                      required
                     />
                   </Form.Group>
                   <br />
@@ -103,10 +131,10 @@ const SecurityQuestions = () => {
                       placeholder='Enter your answer'
                       value={answer2}
                       onChange={(e) => setAnswer2(e.target.value)}
+                      required
                     />
                   </Form.Group>
                 </div>
-                <br />
                 <hr />
                 <div className='text-center'>
                   <Button type='submit' className='m-2 px-5 btn-primary'>
@@ -137,6 +165,7 @@ const SecurityQuestions = () => {
                           placeholder='Enter your answer'
                           value={answer1}
                           onChange={(e) => setAnswer1(e.target.value)}
+                          required
                         />
                       </Form.Group>
                     </div>
@@ -149,6 +178,7 @@ const SecurityQuestions = () => {
                           placeholder='Enter your answer'
                           value={answer2}
                           onChange={(e) => setAnswer2(e.target.value)}
+                          required
                         />
                       </Form.Group>
                     </div>
