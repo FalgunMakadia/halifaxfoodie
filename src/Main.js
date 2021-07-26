@@ -1,19 +1,24 @@
 import React from 'react'
-import logo from './logo.svg'
-import { AmplifySignOut } from '@aws-amplify/ui-react'
-import { Auth } from 'aws-amplify'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Container } from 'react-bootstrap'
+import HomeScreenPage from './pages/HomeScreenPage'
+import OrdersPage from './pages/OrdersPage'
+import Header from './components/Header'
+import RestaurantsPage from './pages/RestaurantsPage'
 
 const Main = () => {
   return (
-    <div className='d-flex flex-column'>
-      <img src={logo} className='App-logo' alt='logo' />
-      <br />
-      <h3>{Auth.user.username.toUpperCase()}, Welcome to your Account</h3>
-      <p>Site is under Development | We apologize for the inconvenience</p>
-      <br />
-      <div className='w-30 text-right m-auto'>
-        <AmplifySignOut />
-      </div>
+    <div className='w-100'>
+      <Router>
+        <Header />
+        <main className='py-3'>
+          <Container>
+            <Route path='/orders' component={OrdersPage} />
+            <Route path='/restaurants' component={RestaurantsPage} />
+            <Route path='/' component={HomeScreenPage} exact />
+          </Container>
+        </main>
+      </Router>
     </div>
   )
 }
