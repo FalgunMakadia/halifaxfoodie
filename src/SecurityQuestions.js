@@ -79,7 +79,7 @@ const SecurityQuestions = () => {
   }
 
   return (
-    <div>
+    <div className='w-100 d-flex justify-content-center'>
       {success ? (
         <Main />
       ) : page === 'register' ? (
