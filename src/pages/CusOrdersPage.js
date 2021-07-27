@@ -66,16 +66,18 @@ const OrdersPage = ({ history }) => {
               </tr>
             </thead>
             <tbody>
-              {userOrders.map((order) => (
-                <tr key={order.order_id}>
-                  <td>{order.order_id.toUpperCase()}</td>
-                  <td>{order.restaurant}</td>
-                  <td>{order.order}</td>
-                  <td>${order.price}</td>
-                  <td>{order.status}</td>
-                  <td>{moment(order.time).format('LL')}</td>
-                </tr>
-              ))}
+              {userOrders
+                .sort((a, b) => a.time - b.time)
+                .map((order) => (
+                  <tr key={order.order_id}>
+                    <td>{order.order_id.toUpperCase()}</td>
+                    <td>{order.restaurant}</td>
+                    <td>{order.order}</td>
+                    <td>${order.price}</td>
+                    <td>{order.status}</td>
+                    <td>{moment(order.time).format('LL')}</td>
+                  </tr>
+                ))}
             </tbody>
           </Table>
         </div>

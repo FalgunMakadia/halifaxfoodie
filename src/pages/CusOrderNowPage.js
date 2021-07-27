@@ -4,11 +4,13 @@ import { useParams } from 'react-router-dom'
 import { ListGroup, Button, Row, Col, Card } from 'react-bootstrap'
 import firebase from 'firebase'
 import { Auth } from 'aws-amplify'
+import Message from '../components/Message'
 
 const OrderNowPage = () => {
   const { restaurant } = useParams()
 
   const [dishes, setDishes] = useState([])
+  const [msg, setMsg] = useState('')
 
   const history = useHistory()
 
@@ -45,8 +47,10 @@ const OrderNowPage = () => {
       .set(user)
       .then(() => {
         console.log('Order Stored in Database')
-        alert('Order Placed!')
-        history.push('/orders')
+        setMsg('Order Placed!')
+        setTimeout(() => {
+          history.push('/orders')
+        }, 3000)
       })
       .catch((err) => {
         console.error('Error in orderNowHandler: ' + err)
@@ -74,6 +78,7 @@ const OrderNowPage = () => {
 
   return (
     <div>
+      {msg.length !== 0 && <Message varient='success'>{msg}</Message>}
       SELECT YOUR ORDER FROM - {restaurant}
       <hr />
       <Row className='mt-2 d-flex flex-row justify-content-between flex-wrap'>
