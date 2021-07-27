@@ -7,6 +7,7 @@ const Header = () => {
 
   const signOutButtonClickHandler = () => {
     localStorage.clear()
+    history.push('/')
     window.location.reload(false)
   }
 

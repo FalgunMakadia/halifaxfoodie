@@ -1,27 +1,73 @@
-import React from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
-import HomeScreenPage from './pages/HomeScreenPage'
-import OrdersPage from './pages/OrdersPage'
+import CusHomeScreenPage from './pages/CusHomeScreenPage'
+import CusOrdersPage from './pages/CusOrdersPage'
 import Header from './components/Header'
-import RestaurantsPage from './pages/RestaurantsPage'
-import OrderNowPage from './pages/OrderNowPage'
+import CusRestaurantsPage from './pages/CusRestaurantsPage'
+import CusOrderNowPage from './pages/CusOrderNowPage'
+import { Auth } from 'aws-amplify'
+import firebase from './firebase'
+import ResHomeScreenPage from './pages/ResHomeScreenPage'
 
 const Main = () => {
+  const [userType, setUserType] = useState('customer')
+
+  const ref = firebase.firestore().collection('users')
+
+  useEffect(() => {
+    const getUserType = (Auth) => {
+      ref
+        .doc(Auth.user.username)
+        .get()
+        .then((doc) => {
+          if (doc.exists && doc.data().userType) {
+            setUserType(doc.data().userType)
+          } else {
+            console.log('No such document!')
+            setUserType('customer')
+          }
+        })
+        .catch((error) => {
+          console.log('Error getting document in getUserType:', error)
+        })
+    }
+
+    getUserType(Auth)
+  }, [])
+
   return (
-    <div className='w-100'>
-      <Router>
-        <Header />
-        <main className='py-3'>
-          <Container>
-            <Route path='/orders' component={OrdersPage} />
-            <Route path='/restaurants' component={RestaurantsPage} />
-            <Route path='/ordernow/:restaurant' component={OrderNowPage} />
-            <Route path='/' component={HomeScreenPage} exact />
-          </Container>
-        </main>
-      </Router>
-    </div>
+    <Fragment>
+      {userType === 'customer' ? (
+        <div className='w-100'>
+          <Router>
+            <Header />
+            <main className='py-3'>
+              <Container>
+                <Route path='/orders' component={CusOrdersPage} />
+                <Route path='/restaurants' component={CusRestaurantsPage} />
+                <Route
+                  path='/ordernow/:restaurant'
+                  component={CusOrderNowPage}
+                />
+                <Route path='/' component={CusHomeScreenPage} exact />
+              </Container>
+            </main>
+          </Router>
+        </div>
+      ) : (
+        <div className='w-100'>
+          <Router>
+            <Header />
+            <main className='py-3'>
+              <Container>
+                <Route path='/' component={ResHomeScreenPage} exact />
+              </Container>
+            </main>
+          </Router>
+        </div>
+      )}
+    </Fragment>
   )
 }
 
