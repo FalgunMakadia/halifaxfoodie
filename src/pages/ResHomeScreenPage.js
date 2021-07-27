@@ -3,13 +3,11 @@ import { Auth } from 'aws-amplify'
 import firebase from 'firebase'
 import { Button } from 'react-bootstrap'
 import { updateRestaurantState } from '../utils/firebaseUtils'
-import Message from '../components/Message'
 
 const ResHomeScreenPage = () => {
   const username = Auth.user.username
 
   const [restaurantStatus, setRestaurantStatus] = useState(true)
-  const [msg, setMsg] = useState('')
 
   const lowerCaseResName = username.replace('_', ' ')
 
@@ -17,13 +15,11 @@ const ResHomeScreenPage = () => {
 
   const openRestaurant = () => {
     updateRestaurantState(Auth, true)
-    setMsg('Open')
     setRestaurantStatus(true)
   }
 
   const closeRestaurant = () => {
     updateRestaurantState(Auth, false)
-    setMsg('Closed')
     setRestaurantStatus(false)
   }
 
@@ -50,14 +46,8 @@ const ResHomeScreenPage = () => {
     getRestaurantStatus()
   }, [])
 
-  console.log('MSG:' + msg)
-
   return (
     <div>
-      {msg.length !== 0 && (
-        <Message varient='success'>Restaurant is now {msg}</Message>
-      )}
-
       <h2>Welcome {lowerCaseResName.toUpperCase()}</h2>
       <div>
         {restaurantStatus ? (
