@@ -74,7 +74,6 @@ export const updateRestaurantState = (Auth, resState) => {
     .update({ status: resState })
     .then(() => {
       console.log('Restaurant Status updated!')
-      // callback()
     })
     .catch(function (error) {
       console.error('Error updating Restaurant Status: ', error)
