@@ -1,11 +1,23 @@
 import { LinkContainer } from 'react-router-bootstrap'
 import { Navbar, Nav, Container } from 'react-bootstrap'
+import { useHistory } from 'react-router-dom'
 
 const Header = () => {
+  const history = useHistory()
+
   const signOutButtonClickHandler = () => {
     localStorage.clear()
     window.location.reload(false)
   }
+
+  const goToRestaurantsHandler = () => {
+    history.push('/restaurants')
+  }
+
+  const goToOrdersHandler = () => {
+    history.push('/orders')
+  }
+
   return (
     <header style={{ position: 'fixed', top: '0', right: '0', left: '0' }}>
       <Navbar
@@ -26,6 +38,26 @@ const Header = () => {
             </Navbar.Brand>
           </LinkContainer>
           <Nav>
+            <Nav.Link
+              className='m-auto'
+              onClick={goToOrdersHandler}
+              style={{
+                fontFamily: 'ui-monospace',
+                fontSize: '15px',
+              }}
+            >
+              ORDERS
+            </Nav.Link>
+            <Nav.Link
+              className='m-auto'
+              onClick={goToRestaurantsHandler}
+              style={{
+                fontFamily: 'ui-monospace',
+                fontSize: '15px',
+              }}
+            >
+              RESTAURANTS
+            </Nav.Link>
             <Nav.Link
               className='m-auto'
               onClick={signOutButtonClickHandler}
