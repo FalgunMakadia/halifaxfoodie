@@ -5,7 +5,9 @@ import CusHomeScreenPage from './pages/CusHomeScreenPage'
 import CusOrdersPage from './pages/CusOrdersPage'
 import Header from './components/Header'
 import CusRestaurantsPage from './pages/CusRestaurantsPage'
+import CusFeedbacksPage from './pages/CusFeedbacksPage'
 import CusOrderNowPage from './pages/CusOrderNowPage'
+import ResDashboardPage from './pages/ResDashboardPage'
 import { Auth } from 'aws-amplify'
 import firebase from './firebase'
 import ResHomeScreenPage from './pages/ResHomeScreenPage'
@@ -46,6 +48,9 @@ const Main = () => {
               <Container>
                 <Route path='/orders' component={CusOrdersPage} />
                 <Route path='/restaurants' component={CusRestaurantsPage} />
+                <Route path='/feedbacks' component={CusFeedbacksPage} />
+                <Route path='/dashboard' component={ResDashboardPage} />
+                
                 <Route
                   path='/ordernow/:restaurant'
                   component={CusOrderNowPage}
