@@ -19,6 +19,10 @@ const Header = () => {
     history.push('/orders')
   }
 
+  const chatBot = () => {
+    history.push('/chatbot')
+  }
+
   return (
     <header style={{ position: 'fixed', top: '0', right: '0', left: '0' }}>
       <Navbar
@@ -39,6 +43,16 @@ const Header = () => {
             </Navbar.Brand>
           </LinkContainer>
           <Nav>
+            <Nav.Link
+              className='m-auto'
+              onClick={chatBot}
+              style={{
+                fontFamily: 'ui-monospace',
+                fontSize: '15px',
+              }}
+            >
+              CHAT WITH BOT
+            </Nav.Link>
             <Nav.Link
               className='m-auto'
               onClick={goToOrdersHandler}
