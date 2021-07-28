@@ -9,6 +9,18 @@ import Amplify from 'aws-amplify'
 import config from './aws-exports'
 Amplify.configure(config)
 
+Amplify.configure({
+  Interactions: {
+    bots: {
+      HalifaxFoodieSApp: {
+        name: 'HalifaxFoodieSApp',
+        alias: '$LATEST',
+        region: 'us-east-1',
+      },
+    },
+  },
+})
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
