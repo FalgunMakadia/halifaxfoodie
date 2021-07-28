@@ -11,6 +11,10 @@ const ResHeader = () => {
     window.location.reload(false)
   }
 
+  const goToDashboardHandler = () => {
+    history.push('/dashboard')
+  }
+
   const goToOrdersHandler = () => {
     history.push('/orders')
   }
@@ -44,6 +48,16 @@ const ResHeader = () => {
               }}
             >
               ORDERS
+            </Nav.Link>
+            <Nav.Link
+              className='m-auto'
+              onClick={goToDashboardHandler}
+              style={{
+                fontFamily: 'ui-monospace',
+                fontSize: '15px',
+              }}
+            >
+            DASHBOARD
             </Nav.Link>
             <Nav.Link
               className='m-auto'

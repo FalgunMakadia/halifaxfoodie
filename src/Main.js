@@ -52,7 +52,6 @@ const Main = () => {
                 <Route path='/orders' component={CusOrdersPage} />
                 <Route path='/restaurants' component={CusRestaurantsPage} />
                 <Route path='/feedbacks' component={CusFeedbacksPage} />
-                <Route path='/dashboard' component={ResDashboardPage} />
                 
                 <Route
                   path='/ordernow/:restaurant'
@@ -64,12 +63,13 @@ const Main = () => {
             </main>
           </Router>
         </div>
-      ) : (
+      ) :   (
         <div className='w-100'>
           <Router>
             <ResHeader />
             <main className='py-3'>
               <Container>
+              <Route path='/dashboard' component={ResDashboardPage} />
                 <Route path='/orders' component={ResOrdersPage} />
                 <Route path='/' component={ResHomeScreenPage} exact />
               </Container>

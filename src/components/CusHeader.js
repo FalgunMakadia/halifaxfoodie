@@ -15,11 +15,6 @@ const Header = () => {
     history.push('/feedbacks')
   }
 
-  const goToDashboardHandler = () => {
-    history.push('/dashboard')
-  }
-  
-
   const goToRestaurantsHandler = () => {
     history.push('/restaurants')
   }
@@ -91,16 +86,6 @@ const Header = () => {
               }}
             >
               FEEDBACK
-            </Nav.Link>
-            <Nav.Link
-              className='m-auto'
-              onClick={goToDashboardHandler}
-              style={{
-                fontFamily: 'ui-monospace',
-                fontSize: '15px',
-              }}
-            >
-              DASHBOARD
             </Nav.Link>
             <Nav.Link
               className='m-auto'
