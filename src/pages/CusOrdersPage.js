@@ -62,7 +62,7 @@ const OrdersPage = ({ history }) => {
                 <th>Order</th>
                 <th>Amount</th>
                 <th>Status</th>
-                <th>Date</th>
+                <th>Order Date and Time</th>
               </tr>
             </thead>
             <tbody>
@@ -75,7 +75,7 @@ const OrdersPage = ({ history }) => {
                     <td>{order.order}</td>
                     <td>${order.price}</td>
                     <td>{order.status}</td>
-                    <td>{moment(order.time).format('LL')}</td>
+                    <td>{moment(order.time).format('LLL')}</td>
                   </tr>
                 ))}
             </tbody>

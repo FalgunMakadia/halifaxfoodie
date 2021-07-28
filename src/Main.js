@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import CusHomeScreenPage from './pages/CusHomeScreenPage'
 import CusOrdersPage from './pages/CusOrdersPage'
-import Header from './components/Header'
+import CusHeader from './components/CusHeader'
 import CusRestaurantsPage from './pages/CusRestaurantsPage'
 import CusFeedbacksPage from './pages/CusFeedbacksPage'
 import CusOrderNowPage from './pages/CusOrderNowPage'
@@ -11,6 +11,9 @@ import ResDashboardPage from './pages/ResDashboardPage'
 import { Auth } from 'aws-amplify'
 import firebase from './firebase'
 import ResHomeScreenPage from './pages/ResHomeScreenPage'
+import ResOrdersPage from './pages/ResOrdersPage'
+import ResHeader from './components/ResHeader'
+import ChatBot from './components/ChatBot'
 
 const Main = () => {
   const [userType, setUserType] = useState('customer')
@@ -43,7 +46,7 @@ const Main = () => {
       {userType === 'customer' ? (
         <div className='w-100'>
           <Router>
-            <Header />
+            <CusHeader />
             <main className='py-3'>
               <Container>
                 <Route path='/orders' component={CusOrdersPage} />
@@ -55,6 +58,7 @@ const Main = () => {
                   path='/ordernow/:restaurant'
                   component={CusOrderNowPage}
                 />
+                <Route path='/chatbot' component={ChatBot} exact />
                 <Route path='/' component={CusHomeScreenPage} exact />
               </Container>
             </main>
@@ -63,9 +67,10 @@ const Main = () => {
       ) : (
         <div className='w-100'>
           <Router>
-            <Header />
+            <ResHeader />
             <main className='py-3'>
               <Container>
+                <Route path='/orders' component={ResOrdersPage} />
                 <Route path='/' component={ResHomeScreenPage} exact />
               </Container>
             </main>

@@ -1,5 +1,7 @@
 import firebase from '../firebase'
+
 const ref = firebase.firestore().collection('users')
+const ref_restaurant = firebase.firestore().collection('restaurants')
 
 export const ifUserAlreadyExists = () => {
   return ref.get().then((i) => {
@@ -63,6 +65,18 @@ export const updateUserToFirestore = (Auth, answer1, answer2) => {
     })
     .catch(function (error) {
       console.error('Error updating Security Answers: ', error)
+    })
+}
+
+export const updateRestaurantState = (Auth, resState) => {
+  ref_restaurant
+    .doc(Auth.user.username.replace('_', ' '))
+    .update({ status: resState })
+    .then(() => {
+      console.log('Restaurant Status updated!')
+    })
+    .catch(function (error) {
+      console.error('Error updating Restaurant Status: ', error)
     })
 }
 
