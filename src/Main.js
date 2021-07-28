@@ -12,6 +12,7 @@ import ResHomeScreenPage from './pages/ResHomeScreenPage'
 import ResOrdersPage from './pages/ResOrdersPage'
 import ResHeader from './components/ResHeader'
 import ChatBot from './components/ChatBot'
+import UploadRecipe from './pages/UploadRecipe'
 
 const Main = () => {
   const [userType, setUserType] = useState('customer')
@@ -54,6 +55,7 @@ const Main = () => {
                   component={CusOrderNowPage}
                 />
                 <Route path='/chatbot' component={ChatBot} exact />
+                <Route path='/uploadfile' component={UploadRecipe} exact />
                 <Route path='/' component={CusHomeScreenPage} exact />
               </Container>
             </main>
