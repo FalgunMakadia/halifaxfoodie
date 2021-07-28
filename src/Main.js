@@ -11,6 +11,7 @@ import firebase from './firebase'
 import ResHomeScreenPage from './pages/ResHomeScreenPage'
 import ResOrdersPage from './pages/ResOrdersPage'
 import ResHeader from './components/ResHeader'
+import ChatBot from './components/ChatBot'
 
 const Main = () => {
   const [userType, setUserType] = useState('customer')
@@ -52,6 +53,7 @@ const Main = () => {
                   path='/ordernow/:restaurant'
                   component={CusOrderNowPage}
                 />
+                <Route path='/chatbot' component={ChatBot} exact />
                 <Route path='/' component={CusHomeScreenPage} exact />
               </Container>
             </main>

@@ -7,7 +7,7 @@ import { updateRestaurantState } from '../utils/firebaseUtils'
 const ResHomeScreenPage = () => {
   const username = Auth.user.username
 
-  const [restaurantStatus, setRestaurantStatus] = useState(true)
+  const [restaurantStatus, setRestaurantStatus] = useState(null)
 
   const lowerCaseResName = username.replace('_', ' ')
 
