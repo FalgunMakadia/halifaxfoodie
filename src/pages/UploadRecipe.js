@@ -11,45 +11,37 @@ const UploadRecipe = () => {
   const [uploadFile, setUploadFile] = useState();
   const [superHero, setSuperHero] = useState();
   const [selectedFile, setSelectedFile] = useState(null);
+  const [text, setText] = useState('');
+  const [response, setResponse] = useState('');
 
   // On file upload (click the upload button)
   const onFileUpload = (event) => {
     event.preventDefault();
     // Create an object of formData
-    const formData = new FormData();
+    // const formData = new FormData();
 
     // Update the formData object
-    formData.append('myRecipe', selectedFile, selectedFile.name);
+    // formData.append('myRecipe', selectedFile, selectedFile.name);
 
     // Details of the uploaded file
-    console.log(selectedFile);
-    console.log(formData);
-
-    // Request made to the backend api
-    // Send formData object
-    // axios.post("api/uploadfile", formData);
-    // axios
-    //   .post(
-    //     'http://localhost:5000/uploadrecipe',
-    //     { msg: 'testing' },
-    //     {
-    //       // paste url here!
-    //       headers: {
-    //         'Content-Type': 'multipart/form-data',
-    //       },
-    //     }
-    //   )
+    // console.log(selectedFile);
+    // console.log(formData);
+    console.log(text);
     axios({
       method: 'post',
       url: 'http://localhost:5000/uploadrecipe',
       data: {
         msg: 'testing',
-        formData: formData,
+        text: text,
+        // formData: formData,
       },
       headers: { 'Content-Type': 'application/json' },
     })
       .then((response) => {
-        alert(response);
+        console.log(response.data.output);
+        let responseObj = response.data.output;
+
+        alert(response.data.output);
       })
       .catch((error) => {
         alert(error);
@@ -108,13 +100,17 @@ const UploadRecipe = () => {
       );
     }
   };
-
+  const handleTextBox = (event) => {
+    setText(event.target.value);
+    // console.log(event.target.value);
+    // console.log('text', text);
+  };
   return (
-    <div>
+    <>
       <div className='uploadFile-screen-container'>
         <div className='uploadFile-screen-content'>
           <div>
-            <h3>Upload your files here!</h3>
+            <h3>Enter you text recipe here </h3>
             <form
               style={{ marginTop: '5%', marginRight: '2%' }}
               onSubmit={onFileUpload}
@@ -123,8 +119,17 @@ const UploadRecipe = () => {
               <button onClick={onFileUpload}>Upload!</button>
             </form>
           </div>
-          {fileData()}
-          {/* <iframe
+          {/* {fileData()} */}
+          <textarea onChange={handleTextBox} value={text}></textarea>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default UploadRecipe;
+
+/* <iframe
             width='600'
             height='450'
             src='https://datastudio.google.com/embed/reporting/feb6ed1e-88ce-4626-bc02-bf80562c3328/page/DzeWC'
@@ -139,11 +144,4 @@ const UploadRecipe = () => {
             frameborder='0'
             // style='border:0'
             allowfullscreen
-          ></iframe> */}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default UploadRecipe;
+          ></iframe> */
