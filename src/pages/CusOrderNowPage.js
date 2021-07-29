@@ -6,6 +6,13 @@ import firebase from 'firebase'
 import { Auth } from 'aws-amplify'
 import Message from '../components/Message'
 
+const { Storage } = require('@google-cloud/storage')
+const fs = require('fs')
+const storage = new Storage()
+const bucket1 = 'reports-foodie'
+const fileName = 'report.csv'
+const fileGCP = storage.bucket(bucket1).file(fileName);
+
 const OrderNowPage = () => {
   const { restaurant } = useParams()
 
@@ -32,6 +39,24 @@ const OrderNowPage = () => {
     return orderId
   }
 
+  const bucketDownload = async () => {
+    await fileGCP.download().then((data, err) => {
+      if (err) console.log('File download error : ' + err);
+      else {
+        console.log('FILE FOUND for reports : ' + data);
+        let newData = data + "\n" + restaurant
+        fs.writeFileSync(fileName, newData)
+        const bucket = storage.bucket(bucket1);
+        bucket.upload(fileName, (err, data) => {
+          if (err) console.log(err);
+          else {
+            console.log('File uploaded : ', data);
+          }
+        });
+      }
+    });
+  };
+
   const orderNowHandler = (dish) => {
     const orderId = generateRandonOrderId()
     const user = {
@@ -55,6 +80,8 @@ const OrderNowPage = () => {
       .catch((err) => {
         console.error('Error in orderNowHandler: ' + err)
       })
+      // call bucket upload for recipe
+      bucketDownload()
   }
 
   useEffect(() => {
