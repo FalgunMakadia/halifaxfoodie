@@ -33,8 +33,9 @@ const OrderNowPage = () => {
     return orderId
   }
 
+  var generatedID = generateRandonOrderId();
   const [data, setData] = useState({
-    orderId: generateRandonOrderId(),
+    orderId: generatedID,
     order: "",
     order_id: "",
     price: "",
@@ -45,7 +46,7 @@ const OrderNowPage = () => {
 
   const orderNowHandler = (dish) => {
   
-      data.orderId= generateRandonOrderId()
+      data.orderId= generatedID
       data.order= dish.name
       data.price= dish.price
       data.restaurant= restaurant
