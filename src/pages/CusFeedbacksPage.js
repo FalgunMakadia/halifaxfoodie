@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import '../'
 
 const CusFeedbacksPage = () => {
 
@@ -63,29 +64,48 @@ const CusFeedbacksPage = () => {
         console.log(e.target)
         setData({
             feedbackData: e.target.value
-        })
+        })      
     }
 
     return ( 
-        <div className="row justify-content-center" >
-            <div className="col-xl-3 col-md-4 col-sm-6 col-12">
-                <h1 >Feedback</h1>
+        <div>
+            
+
+            <div className="mt-4">
+                <h3 style={{ "text-align":"left" }}>Feedback</h3>
+            </div>
+            <br />
+            <div className="col-md-4"></div>
+            <div className="col-md-4" style={{"alignContent":"right"}} style={{ "text-align":"left" }}>
+                <div className="polaroid">
+                        <img src={data.image} alt="Word Cloud" />
+                        <div className="container">
+                            <p> Word Cloud</p>
+                        </div>
+                    </div>
+            </div>
                 <div className="mt-4">
                     <form>
-                        <p>Enter your feedback:</p>
-                        <input
-                        type="text"
-                        id = "feedback"
-                        name = "feedback"
-                        onChange={handleChange}
+                        <p style={{ "text-align":"left" }}>Enter your feedback:</p>
+                        <div className="col-md-4" style={{ "text-align":"left" }}>
+                        <textarea
+                            type="text"
+                            id = "feedback"
+                            name = "feedback"
+                            onChange={handleChange}
                         />
-                        <button type="reset" className="btn btn-primary" placeholder="reset">Reset</button>
-                        <button type="submit" className="btn btn-primary" onClick={onClick} placeholder="submit">Submit</button>
-                        <img src={data.image}/>
+                        </div >
+                        <div className="col-md-8"></div>
+                        <div style={{ "text-align":"left" }}>
+                            <button type="reset" className="btn btn-primary" placeholder="reset">Reset</button>
+                            &nbsp;&nbsp;&nbsp;
+                            <button type="submit" className="btn btn-primary" onClick={onClick} placeholder="submit">Submit</button>
+                        </div>
+                        
                     </form>
                 </div>
-            </div>
-    </div> );
+        </div> 
+    );
 }
 
 export default CusFeedbacksPage
