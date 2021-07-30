@@ -8,7 +8,7 @@ const ResDashboardPage = () => {
 
   return (
     <div >
-            <br /> <br />
+      <br /> <br />
       <div>
         <h3 style={{"text-align":"left"}}>Dashboard</h3>
       </div>
