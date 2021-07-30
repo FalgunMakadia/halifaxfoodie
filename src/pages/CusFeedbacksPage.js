@@ -1,22 +1,39 @@
+import React, {useState} from 'react';
 import axios from 'axios';
-import React , {Component}from 'react';
- 
-export class CusFeedbacksPage extends Component 
-{
-    constructor(props) {
-        super(props)
- 
-        this.state = {
-            fileContent: "",
-            wordCloud: ""
-        }
-    }
- 
-    handleSubmit = (event) => 
+
+const CusFeedbacksPage = () => {
+
+    const [data, setData] = useState({
+        feedbackData: "",
+        wordCloud: "",
+        image: ""
+    })
+
+    const onClick =  (event) => 
     {
         event.preventDefault();
-        let text = "This is deep! I liked Pizza at your place..";
-        console.log("In function")
+        axios.post("https://uya4nc1v2k.execute-api.us-east-1.amazonaws.com/default/wordCloudFunctionGroup17",JSON.stringify({data: data.feedbackData})).then((response) => {
+
+            let wordCloudData = ""
+            response.data.Items.forEach((element, index) => {
+                wordCloudData = wordCloudData + element.feedbackData;
+                wordCloudData = wordCloudData + " ";
+            });
+ 
+            data.wordCloud= wordCloudData;
+
+            onSubmit(event);
+            alert('Successfully stored data into database');
+        }).catch((error) => {
+            console.log("Eroor")
+        })
+    }
+
+    const onSubmit = (event) => 
+    {
+        event.preventDefault();
+        let text = data.wordCloud;
+        console.log("In function",text);
         axios({
             method: 'POST',
             url: 'https://textvis-word-cloud-v1.p.rapidapi.com/v1/textToCloud',
@@ -26,7 +43,7 @@ export class CusFeedbacksPage extends Component
               'x-rapidapi-host': 'textvis-word-cloud-v1.p.rapidapi.com'
             },
             data: {
-              text: 'This is deep! I liked Pizza at your place.',
+              text: text,
               scale: 0.5,
               width: 400,
               height: 400,
@@ -37,36 +54,39 @@ export class CusFeedbacksPage extends Component
               uppercase: false
             }
         }).then((response) => {
-            console.log("Here")
-            console.log('I am here',response.data);
-            this.setState({wordCloud: response.data});
-            if (this.validateForm()) {
-                alert("Details Successfully Saved!!");
-            }
+            data.image = response.data;
+            console.log('image', data.image);
         }).catch((error) => {
             console.log("Eroor")
         })
     }
- 
-    render() {
- 
-        return ( 
-            <div className="row justify-content-center" >
-                <div className="col-xl-3 col-md-4 col-sm-6 col-12">
-                    <h1 >Feedback</h1>
-                    <div className="mt-4">
-                        <form>
-                            <p>Enter your feedback:</p>
-                            <input
-                            type="text"
-                            />
-                            <button type="submit" className="btn btn-primary" onClick={this.handleSubmit} placeholder="submit">Submit</button>
-                            <img src={this.state.wordCloud}/>
-                        </form>
-                    </div>
-                </div>
-        </div> );
+
+    const handleChange = (e) => {
+        console.log(e.target)
+        setData({
+            feedbackData: e.target.value
+        })
     }
+
+    return ( 
+        <div className="row justify-content-center" >
+            <div className="col-xl-3 col-md-4 col-sm-6 col-12">
+                <h1 >Feedback</h1>
+                <div className="mt-4">
+                    <form>
+                        <p>Enter your feedback:</p>
+                        <input
+                        type="text"
+                        id = "feedback"
+                        name = "feedback"
+                        onChange={handleChange}
+                        />
+                        <button type="submit" className="btn btn-primary" onClick={onClick} placeholder="submit">Submit</button>
+                        <img src={data.image}/>
+                    </form>
+                </div>
+            </div>
+    </div> );
 }
- 
-export default CusFeedbacksPage;
+
+export default CusFeedbacksPage
