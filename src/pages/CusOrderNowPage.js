@@ -75,14 +75,12 @@ const OrderNowPage = () => {
         console.error('Error in orderNowHandler: ' + err)
       })
 
-      console.log("START- DYNAMO:============")
+      console.log("DYNAMODB: Storing Data...")
       //Add Lambda Code Here For DynamoDB
       console.log("DATA:-->",data)
       axios.post("https://l37fvpofd3.execute-api.us-east-1.amazonaws.com/default/storeOrderLambda",JSON.stringify({data: data})).then((response) => {
 
         console.log(response);
-
-
           alert('Successfully stored data into database');
       }).catch((error) => {
           console.log("Eroor")

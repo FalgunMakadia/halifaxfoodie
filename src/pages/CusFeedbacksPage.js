@@ -32,6 +32,7 @@ const CusFeedbacksPage = () => {
 
     const onSubmit = () => 
     {
+        // word cloud API Referance: https://wordcloudapi.com
         let text = data.wordCloud;
         axios({
             method: 'POST',
@@ -44,8 +45,8 @@ const CusFeedbacksPage = () => {
             data: {
               text: text,
               scale: 0.5,
-              width: 400,
-              height: 400,
+              width: 800,
+              height: 800,
               colors: ['#375E97', '#FB6542', '#FFBB00', '#3F681C'],
               font: 'Tahoma',
               use_stopwords: true,
