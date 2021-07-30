@@ -8,8 +8,11 @@ const ResDashboardPage = () => {
 
   return (
     <div >
-    Dashboard
-    <iframe width="1500" height="2000" src="https://datastudio.google.com/embed/reporting/5610e53a-3887-4676-b50c-33b2096fb3ce/page/9waWC" frameborder="0" allowfullscreen></iframe>  )
+            <br /> <br />
+      <div>
+        <h3 style={{"text-align":"left"}}>Dashboard</h3>
+      </div>
+      <iframe width="1500" height="2000" src="https://datastudio.google.com/embed/reporting/3532cedc-04b9-4352-93ca-ba9082191b0f/page/ftnWC" frameborder="6" allowfullscreen></iframe>    
     </div>
   )
 }

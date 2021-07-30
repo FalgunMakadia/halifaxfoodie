@@ -5,6 +5,7 @@ import { ListGroup, Button, Row, Col, Card } from 'react-bootstrap'
 import firebase from 'firebase'
 import { Auth } from 'aws-amplify'
 import Message from '../components/Message'
+import axios from 'axios'
 
 const OrderNowPage = () => {
   const { restaurant } = useParams()
@@ -32,7 +33,25 @@ const OrderNowPage = () => {
     return orderId
   }
 
+  const [data, setData] = useState({
+    orderId: generateRandonOrderId(),
+    order: "",
+    order_id: "",
+    price: "",
+    restaurant: "",
+    status: "",
+    time: ""
+  })
+
   const orderNowHandler = (dish) => {
+  
+      data.orderId= generateRandonOrderId()
+      data.order= dish.name
+      data.price= dish.price
+      data.restaurant= restaurant
+      data.status= 'Order Placed'
+      data.time= Date.now()
+
     const orderId = generateRandonOrderId()
     const user = {
       order: dish.name,
@@ -54,6 +73,19 @@ const OrderNowPage = () => {
       })
       .catch((err) => {
         console.error('Error in orderNowHandler: ' + err)
+      })
+
+      console.log("START- DYNAMO:============")
+      //Add Lambda Code Here For DynamoDB
+      console.log("DATA:-->",data)
+      axios.post("https://l37fvpofd3.execute-api.us-east-1.amazonaws.com/default/storeOrderLambda",JSON.stringify({data: data})).then((response) => {
+
+        console.log(response);
+
+
+          alert('Successfully stored data into database');
+      }).catch((error) => {
+          console.log("Eroor")
       })
   }
 

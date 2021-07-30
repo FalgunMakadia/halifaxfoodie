@@ -22,18 +22,16 @@ const CusFeedbacksPage = () => {
  
             data.wordCloud= wordCloudData;
 
-            onSubmit(event);
+            onSubmit();
             alert('Successfully stored data into database');
         }).catch((error) => {
             console.log("Eroor")
         })
     }
 
-    const onSubmit = (event) => 
+    const onSubmit = () => 
     {
-        event.preventDefault();
         let text = data.wordCloud;
-        console.log("In function",text);
         axios({
             method: 'POST',
             url: 'https://textvis-word-cloud-v1.p.rapidapi.com/v1/textToCloud',
@@ -81,6 +79,7 @@ const CusFeedbacksPage = () => {
                         name = "feedback"
                         onChange={handleChange}
                         />
+                        <button type="reset" className="btn btn-primary" placeholder="reset">Reset</button>
                         <button type="submit" className="btn btn-primary" onClick={onClick} placeholder="submit">Submit</button>
                         <img src={data.image}/>
                     </form>
