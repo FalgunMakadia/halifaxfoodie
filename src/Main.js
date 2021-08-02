@@ -13,6 +13,7 @@ import ResOrdersPage from './pages/ResOrdersPage'
 import ResHeader from './components/ResHeader'
 import ChatBot from './components/ChatBot'
 import UploadRecipe from './pages/UploadRecipe'
+import ViewReportsPage from './pages/ViewReportsPage.js';
 
 const Main = () => {
   const [userType, setUserType] = useState('customer')
@@ -68,6 +69,7 @@ const Main = () => {
             <main className='py-3'>
               <Container>
                 <Route path='/orders' component={ResOrdersPage} />
+                <Route path='/viewreports' component={ViewReportsPage} exact />
                 <Route path='/' component={ResHomeScreenPage} exact />
               </Container>
             </main>
