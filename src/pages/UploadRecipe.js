@@ -29,7 +29,7 @@ const UploadRecipe = () => {
     console.log(text);
     axios({
       method: 'post',
-      url: 'https://git.heroku.com/halifaxfoodie-backend.git/uploadrecipe',
+      url: 'https://halifax-foodie-ml-4z2wswh5ea-uc.a.run.app/uploadrecipe',
       data: {
         msg: 'testing',
         text: text,

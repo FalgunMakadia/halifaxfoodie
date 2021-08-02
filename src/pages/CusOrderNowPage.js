@@ -37,7 +37,7 @@ const OrderNowPage = () => {
   const postData = ()=> {
     axios({
       method: 'post',
-      url: 'http://localhost:5000/uploadrestaurant',
+      url: 'https://halifax-foodie-ml-4z2wswh5ea-uc.a.run.app/uploadrestaurant',
       data: {
         msg: 'testing',
         text: restaurant
