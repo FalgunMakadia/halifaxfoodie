@@ -53,6 +53,17 @@ const OrderNowPage = () => {
       });
   }
 
+  var generatedID = generateRandonOrderId();
+  const [data, setData] = useState({
+    orderId: generatedID,
+    order: "",
+    order_id: "",
+    price: "",
+    restaurant: "",
+    status: "",
+    time: ""
+  })
+
   const orderNowHandler = (dish) => {
   
       data.orderId= generatedID
