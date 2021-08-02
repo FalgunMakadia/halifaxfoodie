@@ -31,7 +31,7 @@ app.post('/uploadrestaurant', (req, res) => {
   const storage = new Storage();
   const reportsBucketName = 'reports-foodie';
   const fileName = 'report.csv';
-  const fileGCP = storage.bucket(reportsBucket).file(fileName);
+  const fileGCP = storage.bucket(reportsBucketName).file(fileName);
 
   fileGCP.download().then((data, err) => {
     if (err) console.log('File download error : ' + err);
