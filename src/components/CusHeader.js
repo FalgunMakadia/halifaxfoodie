@@ -11,6 +11,10 @@ const Header = () => {
     window.location.reload(false)
   }
 
+  const goToFeedbackHandler = () => {
+    history.push('/feedbacks')
+  }
+
   const goToRestaurantsHandler = () => {
     history.push('/restaurants')
   }
@@ -72,6 +76,16 @@ const Header = () => {
               }}
             >
               RESTAURANTS
+            </Nav.Link>
+            <Nav.Link
+              className='m-auto'
+              onClick={goToFeedbackHandler}
+              style={{
+                fontFamily: 'ui-monospace',
+                fontSize: '15px',
+              }}
+            >
+              FEEDBACK
             </Nav.Link>
             <Nav.Link
               className='m-auto'

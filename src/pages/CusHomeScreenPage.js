@@ -37,8 +37,7 @@ const HomeScreenPage = ({ history }) => {
 
   return (
     <div className='d-flex flex-column'>
-      {userType === 'c' ? (
-        <div>
+      <div>
           <h3>
             {Auth.user.username.toUpperCase()}, Welcome to your Account
             (Customer)
@@ -58,28 +57,6 @@ const HomeScreenPage = ({ history }) => {
             </Button>
           </div>
         </div>
-      ) : (
-        <div>
-          <h3>
-            {Auth.user.username.toUpperCase()}, Welcome to your Account
-            (Restaurant)
-          </h3>
-          <p>Site is under Development | We apologize for the inconvenience</p>
-          <br />
-          <div>
-            <Button
-              style={{
-                backgroundColor: '#006400',
-                borderColor: '#006400',
-                borderRadius: '2px',
-              }}
-              onClick={buttonClickHandler}
-            >
-              Orders
-            </Button>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
