@@ -1,7 +1,26 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import firebase from 'firebase'
 
 const CusFeedbacksPage = () => {
+
+    const [restaurantList, setRestaurantList] = useState([])
+    
+    const ref_restaurants = firebase.firestore().collection('restaurants')
+    
+    useEffect(() => {
+        let arr = []
+        ref_restaurants.get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+            arr.push(doc.data())
+            })
+            console.log(arr)
+            setRestaurantList(arr)
+        })
+        
+    }, [])
+
+    console.log("REST:",restaurantList);
 
     const [data, setData] = useState({
         feedbackData: "",
@@ -9,10 +28,16 @@ const CusFeedbacksPage = () => {
         image: ""
     })
 
+    const [feedbackData, setFeedbackData] = useState({
+        feedbackData: "",
+        restaurantName: "",
+    })
+
     const onClick =  (event) => 
     {
+        console.log('myuyyy',feedbackData)
         event.preventDefault();
-        axios.post("https://uya4nc1v2k.execute-api.us-east-1.amazonaws.com/default/wordCloudFunctionGroup17",JSON.stringify({data: data.feedbackData})).then((response) => {
+        axios.post("https://uya4nc1v2k.execute-api.us-east-1.amazonaws.com/default/wordCloudFunctionGroup17",JSON.stringify({data: feedbackData})).then((response) => {
 
             let wordCloudData = ""
             response.data.Items.forEach((element, index) => {
@@ -61,10 +86,8 @@ const CusFeedbacksPage = () => {
     }
 
     const handleChange = (e) => {
-        console.log(e.target)
-        setData({
-            feedbackData: e.target.value
-        })      
+        let res = {...feedbackData, [e.target.name]: e.target.value}
+        setFeedbackData(res)      
     }
 
     return ( 
@@ -86,13 +109,21 @@ const CusFeedbacksPage = () => {
             </div>
                 <div className="mt-4">
                     <form>
+                    <p style={{ "text-align":"left" }}>Select the Restaurant:</p>
+                    <select name="restaurantName" onChange={(e) => handleChange(e)}>
+                        <option>Select the restaurant</option>
+                        {restaurantList.length > 0 &&  restaurantList.map(function (restaurant, index){
+                            return <option value={restaurant.name}>{restaurant.name}</option>
+                        })}
+                    </select>
+
                         <p style={{ "text-align":"left" }}>Enter your feedback:</p>
                         <div className="col-md-4" style={{ "text-align":"left" }}>
                         <textarea
                             type="text"
-                            id = "feedback"
-                            name = "feedback"
-                            onChange={handleChange}
+                            id = "feedbackData"
+                            name = "feedbackData"
+                            onChange={(e) => handleChange(e)}
                         />
                         </div >
                         <div className="col-md-8"></div>
