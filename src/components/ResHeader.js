@@ -19,6 +19,10 @@ const ResHeader = () => {
     history.push('/orders')
   }
 
+  const goToReports = () => {
+    history.push('/viewreports');
+  };
+
   return (
     <header style={{ position: 'fixed', top: '0', right: '0', left: '0' }}>
       <Navbar
@@ -49,6 +53,18 @@ const ResHeader = () => {
             >
               ORDERS
             </Nav.Link>
+
+            <Nav.Link
+              className='m-auto'
+              onClick={goToReports}
+              style={{
+                fontFamily: 'ui-monospace',
+                fontSize: '15px',
+              }}
+            >
+              REPORTS
+            </Nav.Link>
+            
             <Nav.Link
               className='m-auto'
               onClick={goToDashboardHandler}

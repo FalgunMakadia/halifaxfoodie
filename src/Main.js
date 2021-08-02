@@ -14,6 +14,8 @@ import ResHomeScreenPage from './pages/ResHomeScreenPage'
 import ResOrdersPage from './pages/ResOrdersPage'
 import ResHeader from './components/ResHeader'
 import ChatBot from './components/ChatBot'
+import UploadRecipe from './pages/UploadRecipe'
+import ViewReportsPage from './pages/ViewReportsPage.js';
 
 const Main = () => {
   const [userType, setUserType] = useState('customer')
@@ -58,6 +60,7 @@ const Main = () => {
                   component={CusOrderNowPage}
                 />
                 <Route path='/chatbot' component={ChatBot} exact />
+                <Route path='/uploadfile' component={UploadRecipe} exact />
                 <Route path='/' component={CusHomeScreenPage} exact />
               </Container>
             </main>
@@ -71,6 +74,7 @@ const Main = () => {
               <Container>
               <Route path='/dashboard' component={ResDashboardPage} />
                 <Route path='/orders' component={ResOrdersPage} />
+                <Route path='/viewreports' component={ViewReportsPage} exact />
                 <Route path='/' component={ResHomeScreenPage} exact />
               </Container>
             </main>

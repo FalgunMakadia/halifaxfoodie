@@ -33,16 +33,25 @@ const OrderNowPage = () => {
     return orderId
   }
 
-  var generatedID = generateRandonOrderId();
-  const [data, setData] = useState({
-    orderId: generatedID,
-    order: "",
-    order_id: "",
-    price: "",
-    restaurant: "",
-    status: "",
-    time: ""
-  })
+  // function to post restaurant data to GCP for report generation
+  const postData = ()=> {
+    axios({
+      method: 'post',
+      url: 'https://halifax-foodie-ml-4z2wswh5ea-uc.a.run.app/uploadrestaurant',
+      data: {
+        msg: 'testing',
+        text: restaurant
+      },
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((response) => {
+        console.log(response.data.output);
+        let responseObj = response.data.output;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   const orderNowHandler = (dish) => {
   
@@ -75,6 +84,8 @@ const OrderNowPage = () => {
       .catch((err) => {
         console.error('Error in orderNowHandler: ' + err)
       })
+
+      postData()
 
       console.log("DYNAMODB: Storing Data...")
       //Add Lambda Code Here For DynamoDB

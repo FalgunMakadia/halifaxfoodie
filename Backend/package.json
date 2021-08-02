@@ -1,0 +1,18 @@
+{
+  "name": "halifax-foodie-ML-Backend",
+  "version": "1.0.0",
+  "description": "Machine Learning Component backend for Halifax-Foodie Application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Heenal Sapovadia",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "@google-cloud/storage": "^5.10.0"
+  }
+}
